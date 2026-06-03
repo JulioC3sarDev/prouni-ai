@@ -54,31 +54,6 @@ with col3:
 st.markdown("---")
 
 # ==================================
-# SIDEBAR
-# ==================================
-
-st.sidebar.title("Sobre o Projeto")
-
-st.sidebar.info(
-    """
-    Projeto desenvolvido para a disciplina de
-    Ciência de Dados e Inteligência Artificial.
-
-    Equipe 05:
-
-    Ariel Barbosa
-
-    Cézar Bezerra
-
-    Júlio César
-
-    Maria Eduarda
-
-    Lucas Nascimento
-    """
-)
-
-# ==================================
 # FORMULÁRIO
 # ==================================
 
