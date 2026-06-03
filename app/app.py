@@ -37,23 +37,6 @@ concedida pelo PROUNI com base nas características do estudante.
 """)
 
 # ==================================
-# MÉTRICAS
-# ==================================
-
-col1, col2, col3 = st.columns(3)
-
-with col1:
-    st.metric("Modelo", "Random Forest")
-
-with col2:
-    st.metric("Dataset", "PROUNI 2017")
-
-with col3:
-    st.metric("Status", "Online")
-
-st.markdown("---")
-
-# ==================================
 # FORMULÁRIO
 # ==================================
 
