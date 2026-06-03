@@ -12,10 +12,10 @@ A aplicação permite que o usuário informe características de um estudante e 
 
 ## Integrantes da Equipe
 
-- Ariel Barbosa
-- Cézar Bezerra
-- Júlio César Ferreira
-- Maria Eduarda
+- Ariel Barbosa da Luz
+- Cézar Bezerra 
+- Júlio César dos Santos Ferreira
+- Maria Eduarda de Santana
 - Lucas Nascimento
 
 ---
