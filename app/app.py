@@ -2,7 +2,19 @@ import streamlit as st
 import pickle
 import pandas as pd
 
-# Carregar modelo
+# ==================================
+# CONFIGURAÇÃO DA PÁGINA
+# ==================================
+
+st.set_page_config(
+    page_title="PROUNI AI",
+    layout="wide"
+)
+
+# ==================================
+# CARREGAR MODELO
+# ==================================
+
 data = pickle.load(
     open("../model/prouni_model.pkl", "rb")
 )
@@ -11,82 +23,173 @@ model = data["model"]
 encoders = data["encoders"]
 target_encoder = data["target_encoder"]
 
-st.set_page_config(
-    page_title="Predição de Bolsa PROUNI",
-    page_icon="🎓"
+# ==================================
+# CABEÇALHO
+# ==================================
+
+st.title("Sistema de Predição de Bolsas PROUNI")
+
+st.markdown("""
+Esta aplicação utiliza técnicas de Machine Learning para prever o tipo de bolsa
+concedida pelo PROUNI com base nas características do estudante.
+
+**Modelo utilizado:** Random Forest Classifier
+""")
+
+# ==================================
+# MÉTRICAS
+# ==================================
+
+col1, col2, col3 = st.columns(3)
+
+with col1:
+    st.metric("Modelo", "Random Forest")
+
+with col2:
+    st.metric("Dataset", "PROUNI 2017")
+
+with col3:
+    st.metric("Status", "Online")
+
+st.markdown("---")
+
+# ==================================
+# SIDEBAR
+# ==================================
+
+st.sidebar.title("Sobre o Projeto")
+
+st.sidebar.info(
+    """
+    Projeto desenvolvido para a disciplina de
+    Ciência de Dados e Inteligência Artificial.
+
+    Equipe 05:
+
+    Ariel Barbosa
+
+    Cézar Bezerra
+
+    Júlio César
+
+    Maria Eduarda
+
+    Lucas Nascimento
+    """
 )
 
-st.title("🎓 Predição de Bolsa do PROUNI")
+# ==================================
+# FORMULÁRIO
+# ==================================
 
-st.write(
-    "Preencha os dados abaixo para prever o tipo de bolsa."
-)
+col_esq, col_dir = st.columns(2)
 
-sexo = st.selectbox(
-    "Sexo",
-    ["F", "M"]
-)
+with col_esq:
 
-raca = st.selectbox(
-    "Raça",
-    [
-        "Branca",
-        "Parda",
-        "Preta",
-        "Amarela",
-        "Indígena",
-        "Não Informada"
-    ]
-)
+    sexo = st.selectbox(
+        "Sexo",
+        ["F", "M"],
+        index=None,
+        placeholder="Selecione o sexo"
+    )
 
-regiao = st.selectbox(
-    "Região",
-    [
-        "Sul",
-        "Sudeste",
-        "Norte",
-        "Nordeste",
-        "Centro-Oeste"
-    ]
-)
+    raca = st.selectbox(
+        "Raça",
+        [
+            "Branca",
+            "Parda",
+            "Preta",
+            "Amarela",
+            "Indígena",
+            "Não Informada"
+        ],
+        index=None,
+        placeholder="Selecione a raça"
+    )
 
-uf = st.selectbox(
-    "UF",
-    [
-        "PR","SP","RO","MG","SC","ES","PE","RS","RJ","BA",
-        "PA","MA","MT","SE","DF","GO","CE","MS","AC","RR",
-        "TO","AM","AL","PB","RN","PI","AP"
-    ]
-)
+    regiao = st.selectbox(
+        "Região",
+        [
+            "Sul",
+            "Sudeste",
+            "Norte",
+            "Nordeste",
+            "Centro-Oeste"
+        ],
+        index=None,
+        placeholder="Selecione a região"
+    )
 
-modalidade = st.selectbox(
-    "Modalidade de Ensino",
-    [
-        "Presencial",
-        "EAD"
-    ]
-)
+    uf = st.selectbox(
+        "UF",
+        [
+            "PR", "SP", "RO", "MG", "SC", "ES", "PE",
+            "RS", "RJ", "BA", "PA", "MA", "MT", "SE",
+            "DF", "GO", "CE", "MS", "AC", "RR", "TO",
+            "AM", "AL", "PB", "RN", "PI", "AP"
+        ],
+        index=None,
+        placeholder="Selecione a UF"
+    )
 
-turno = st.selectbox(
-    "Turno do Curso",
-    [
-        "Noturno",
-        "Matutino",
-        "Vespertino",
-        "Curso a distância",
-        "Integral"
-    ]
-)
+with col_dir:
 
-deficiente = st.selectbox(
-    "Possui Deficiência Física?",
-    [
-        "N",
-        "S"
-    ]
-)
+    modalidade = st.selectbox(
+        "Modalidade de Ensino",
+        [
+            "Presencial",
+            "EAD"
+        ],
+        index=None,
+        placeholder="Selecione a modalidade"
+    )
+
+    turno = st.selectbox(
+        "Turno do Curso",
+        [
+            "Noturno",
+            "Matutino",
+            "Vespertino",
+            "Curso a distância",
+            "Integral"
+        ],
+        index=None,
+        placeholder="Selecione o turno"
+    )
+
+    deficiente = st.selectbox(
+        "Possui Deficiência Física?",
+        [
+            "N",
+            "S"
+        ],
+        index=None,
+        placeholder="Selecione uma opção"
+    )
+
+st.markdown("")
+
+# ==================================
+# PREVISÃO
+# ==================================
 
 if st.button("Prever Bolsa"):
+
+    if None in [
+        sexo,
+        raca,
+        regiao,
+        uf,
+        modalidade,
+        turno,
+        deficiente
+    ]:
+
+        st.warning(
+            "Preencha todos os campos antes de realizar a previsão."
+        )
+
+        st.stop()
 
     entrada = pd.DataFrame([{
         "SEXO_BENEFICIARIO_BOLSA": sexo,
@@ -105,7 +208,9 @@ if st.button("Prever Bolsa"):
                 entrada[col]
             )
 
-        previsao = model.predict(entrada)
+        previsao = model.predict(
+            entrada
+        )
 
         resultado = target_encoder.inverse_transform(
             previsao
@@ -120,3 +225,32 @@ if st.button("Prever Bolsa"):
         st.error(
             f"Erro ao realizar previsão: {e}"
         )
+
+# ==================================
+# RODAPÉ
+# ==================================
+
+st.markdown("---")
+
+st.markdown("""
+### Informações do Projeto
+
+**Disciplina:** Ciência de Dados e Inteligência Artificial
+
+**Objetivo:** Prever o tipo de bolsa concedida pelo PROUNI utilizando dados históricos.
+
+**Tecnologias utilizadas:**
+
+- Python
+- Pandas
+- NumPy
+- Scikit-Learn
+- Streamlit
+- Pickle
+- Git
+- GitHub
+""")
+
+st.markdown("---")
+
+st.caption("Equipe 05 - PROUNI AI - 2026")
