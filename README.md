@@ -1,16 +1,16 @@
-# 🎓 PROUNI Scholarship Prediction
+# Predição de Bolsa do PROUNI
 
-## Overview
+## Visão Geral
 
-This project was developed as part of the Artificial Intelligence and Data Science course.
+Este projeto foi desenvolvido como parte da disciplina de Ciência de Dados e Inteligência Artificial.
 
-The objective is to predict the type of scholarship granted by the Brazilian University for All Program (PROUNI) using Machine Learning techniques and historical data from the PROUNI 2017 dataset.
+O objetivo é prever o tipo de bolsa concedida pelo Programa Universidade para Todos (PROUNI) utilizando técnicas de Machine Learning e dados históricos do PROUNI 2017.
 
-The application allows users to enter student information through a web interface and receive a prediction of the scholarship type.
+A aplicação permite que o usuário informe características de um estudante e receba uma previsão do tipo de bolsa por meio de uma interface web desenvolvida com Streamlit.
 
 ---
 
-## Team Members
+## Integrantes da Equipe
 
 - Ariel Barbosa
 - Cézar Bezerra
@@ -20,42 +20,42 @@ The application allows users to enter student information through a web interfac
 
 ---
 
-## Problem Statement
+## Problema Proposto
 
-The PROUNI program offers scholarships to students enrolled in higher education institutions in Brazil.
+O PROUNI oferece bolsas de estudo para estudantes em instituições de ensino superior no Brasil.
 
-This project aims to predict the scholarship type based on student characteristics such as:
+Este projeto tem como objetivo prever o tipo de bolsa concedida com base em características do estudante, tais como:
 
-- Gender
-- Race
-- Region
-- State (UF)
-- Teaching Modality
-- Course Shift
-- Physical Disability Status
+- Sexo
+- Raça
+- Região
+- Unidade Federativa (UF)
+- Modalidade de Ensino
+- Turno do Curso
+- Deficiência Física
 
-The target variable is:
+A variável alvo utilizada foi:
 
-- Scholarship Type (TIPO_BOLSA)
-
----
-
-## Dataset
-
-Dataset used:
-
-**PROUNI 2017 Dataset**
-
-The dataset contains information about scholarship beneficiaries, including demographic, geographic, and educational characteristics.
+- Tipo de Bolsa (TIPO_BOLSA)
 
 ---
 
-## Features Used
+## Base de Dados
 
-The model was trained using the following features:
+Base utilizada:
 
-| Feature |
-|----------|
+**PROUNI 2017**
+
+A base contém informações sobre beneficiários do PROUNI, incluindo características demográficas, geográficas e educacionais.
+
+---
+
+## Variáveis Utilizadas
+
+O modelo foi treinado utilizando as seguintes variáveis:
+
+| Variável |
+|-----------|
 | SEXO_BENEFICIARIO_BOLSA |
 | RACA_BENEFICIARIO_BOLSA |
 | REGIAO_BENEFICIARIO_BOLSA |
@@ -64,15 +64,15 @@ The model was trained using the following features:
 | NOME_TURNO_CURSO_BOLSA |
 | BENEFICIARIO_DEFICIENTE_FISICO |
 
-### Target Variable
+### Variável Alvo
 
-| Variable |
+| Variável |
 |-----------|
 | TIPO_BOLSA |
 
 ---
 
-## Technologies Used
+## Tecnologias Utilizadas
 
 - Python
 - Pandas
@@ -85,36 +85,36 @@ The model was trained using the following features:
 
 ---
 
-## Machine Learning Model
+## Modelo de Machine Learning
 
-The chosen algorithm was:
+O algoritmo escolhido foi:
 
 ### Random Forest Classifier
 
-Reasons for choosing Random Forest:
+Motivos da escolha:
 
-- Good performance on classification problems
-- Handles categorical data effectively after encoding
-- Robust against overfitting
-- Easy to implement and interpret
-
----
-
-## Data Preparation
-
-The following preprocessing steps were applied:
-
-1. Data loading using Pandas
-2. Selection of relevant features
-3. Encoding categorical variables using LabelEncoder
-4. Splitting data into training and testing sets
-5. Model training
-6. Model evaluation
-7. Model serialization using Pickle
+- Bom desempenho em problemas de classificação.
+- Facilidade de implementação.
+- Menor tendência ao overfitting.
+- Boa capacidade de generalização.
 
 ---
 
-## Project Structure
+## Preparação dos Dados
+
+As seguintes etapas foram realizadas:
+
+1. Carregamento da base de dados.
+2. Seleção das variáveis relevantes.
+3. Conversão de variáveis categóricas utilizando LabelEncoder.
+4. Divisão dos dados em treino e teste.
+5. Treinamento do modelo.
+6. Avaliação da acurácia.
+7. Serialização do modelo utilizando Pickle.
+
+---
+
+## Estrutura do Projeto
 
 ```text
 Projeto Data Science/
@@ -136,27 +136,27 @@ Projeto Data Science/
 
 ---
 
-## Installation
+## Instalação
 
-### Clone Repository
+### Clonar o Repositório
 
 ```bash
 git clone https://github.com/JulioC3sarDev/prouni-ai.git
 ```
 
-### Access Project Folder
+### Acessar a Pasta do Projeto
 
 ```bash
 cd prouni-ai
 ```
 
-### Create Virtual Environment
+### Criar Ambiente Virtual
 
 ```bash
 python -m venv venv
 ```
 
-### Activate Virtual Environment
+### Ativar Ambiente Virtual
 
 Windows:
 
@@ -164,7 +164,7 @@ Windows:
 venv\Scripts\activate
 ```
 
-### Install Dependencies
+### Instalar Dependências
 
 ```bash
 pip install -r requirements.txt
@@ -172,9 +172,9 @@ pip install -r requirements.txt
 
 ---
 
-## Training the Model
+## Treinamento do Modelo
 
-To train the model:
+Para treinar o modelo:
 
 ```bash
 cd model
@@ -182,7 +182,7 @@ cd model
 python train_model.py
 ```
 
-After execution, the following file will be generated:
+Ao final da execução será criado o arquivo:
 
 ```text
 prouni_model.pkl
@@ -190,21 +190,21 @@ prouni_model.pkl
 
 ---
 
-## Running the Application
+## Execução da Aplicação
 
-Navigate to the application folder:
+Acesse a pasta da aplicação:
 
 ```bash
 cd app
 ```
 
-Run Streamlit:
+Execute o Streamlit:
 
 ```bash
 streamlit run app.py
 ```
 
-The application will be available at:
+A aplicação ficará disponível em:
 
 ```text
 http://localhost:8501
@@ -212,89 +212,89 @@ http://localhost:8501
 
 ---
 
-## Application Workflow
+## Fluxo da Solução
 
 ```text
-PROUNI Dataset
+Base PROUNI 2017
         ↓
-Data Preparation
+Tratamento dos Dados
         ↓
-Random Forest Training
+Treinamento do Modelo
         ↓
-Model Serialization (.pkl)
+Random Forest
         ↓
-Streamlit Interface
+Arquivo .pkl
         ↓
-Scholarship Prediction
+Interface Streamlit
+        ↓
+Predição do Tipo de Bolsa
 ```
 
 ---
 
-## Example Prediction
+## Exemplo de Utilização
 
-Input:
+Entrada:
 
-- Gender: F
-- Race: Parda
-- Region: Nordeste
+- Sexo: F
+- Raça: Parda
+- Região: Nordeste
 - UF: PE
-- Teaching Modality: Presencial
-- Course Shift: Noturno
-- Physical Disability: N
+- Modalidade: Presencial
+- Turno: Noturno
+- Deficiência Física: N
 
-Output:
+Saída:
 
 ```text
-Predicted Scholarship Type:
+Tipo de Bolsa Previsto:
 Bolsa Integral
 ```
 
 ---
 
-## Results
+## Resultados
 
-The model performance is evaluated using:
+O desempenho do modelo foi avaliado utilizando:
 
-- Accuracy Score
+- Accuracy Score (Acurácia)
 
-Example:
+Exemplo:
 
 ```text
 Accuracy: 0.84
 ```
 
-(The actual value may vary depending on training execution.)
+(O valor pode variar dependendo do treinamento realizado.)
 
 ---
 
-## Future Improvements
+## Possíveis Melhorias Futuras
 
-Possible future enhancements include:
-
-- Hyperparameter tuning
-- Additional feature engineering
-- Confusion matrix visualization
-- Feature importance analysis
-- Cloud deployment
-- Real-time API integration
+- Ajuste de hiperparâmetros.
+- Inclusão de novas variáveis.
+- Matriz de confusão.
+- Gráficos de importância das variáveis.
+- Publicação em nuvem.
+- Integração com APIs.
 
 ---
 
-## Conclusion
+## Conclusão
 
-This project demonstrates the application of Machine Learning techniques to predict scholarship types using educational data.
+Este projeto demonstra a aplicação prática de técnicas de Machine Learning para prever o tipo de bolsa concedida pelo PROUNI.
 
-The solution integrates:
+A solução integra:
 
-- Data Analysis
+- Análise de Dados
 - Machine Learning
-- Model Serialization
-- Web Application Development
+- Serialização de Modelos
+- Desenvolvimento Web
 
-providing a complete end-to-end Artificial Intelligence solution.
+resultando em uma aplicação completa de Inteligência Artificial.
 
 ---
 
-## License
+## Licença
 
-This project was developed for academic purposes only.
+Projeto desenvolvido exclusivamente para fins acadêmicos.
