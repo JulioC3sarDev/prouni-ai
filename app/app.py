@@ -183,32 +183,3 @@ if st.button("Prever Bolsa"):
         st.error(
             f"Erro ao realizar previsão: {e}"
         )
-
-# ==================================
-# RODAPÉ
-# ==================================
-
-st.markdown("---")
-
-st.markdown("""
-### Informações do Projeto
-
-**Disciplina:** Ciência de Dados e Inteligência Artificial
-
-**Objetivo:** Prever o tipo de bolsa concedida pelo PROUNI utilizando dados históricos.
-
-**Tecnologias utilizadas:**
-
-- Python
-- Pandas
-- NumPy
-- Scikit-Learn
-- Streamlit
-- Pickle
-- Git
-- GitHub
-""")
-
-st.markdown("---")
-
-st.caption("Equipe 05 - PROUNI AI - 2026")
